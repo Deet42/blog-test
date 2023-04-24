@@ -22,3 +22,8 @@ const (
 	PostKey      = "Post/value/"
 	PostCountKey = "Post/count/"
 )
+
+const (
+	HelpKey= "Help/value/"
+	HelpCountKey= "Help/count/"
+)

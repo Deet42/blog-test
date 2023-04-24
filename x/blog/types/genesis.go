@@ -11,7 +11,8 @@ const DefaultIndex uint64 = 1
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		PostList: []Post{},
-		// this line is used by starport scaffolding # genesis/types/default
+		HelpList: []Help{},
+// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
 }
@@ -31,7 +32,19 @@ func (gs GenesisState) Validate() error {
 		}
 		postIdMap[elem.Id] = true
 	}
-	// this line is used by starport scaffolding # genesis/types/validate
+	// Check for duplicated ID in help
+helpIdMap := make(map[uint64]bool)
+helpCount := gs.GetHelpCount()
+for _, elem := range gs.HelpList {
+	if _, ok := helpIdMap[elem.Id]; ok {
+		return fmt.Errorf("duplicated id for help")
+	}
+	if elem.Id >= helpCount {
+		return fmt.Errorf("help id should be lower or equal than the last id")
+	}
+	helpIdMap[elem.Id] = true
+}
+// this line is used by starport scaffolding # genesis/types/validate
 
 	return gs.Params.Validate()
 }

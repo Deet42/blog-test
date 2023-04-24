@@ -5,6 +5,7 @@ package blog.blog;
 import "gogoproto/gogo.proto";
 import "blog/blog/params.proto";
 import "blog/blog/post.proto";
+import "blog/blog/help.proto";
 
 option go_package = "blog/x/blog/types";
 
@@ -13,5 +14,7 @@ message GenesisState {
            Params params    = 1 [(gogoproto.nullable) = false];
   repeated Post   postList  = 2 [(gogoproto.nullable) = false];
            uint64 postCount = 3;
+  repeated Help   helpList  = 4 [(gogoproto.nullable) = false];
+           uint64 helpCount = 5;
 }
 
