@@ -3,9 +3,9 @@ package types
 import (
 	"testing"
 
+	"blog/testutil/sample"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
-	"blog/testutil/sample"
 )
 
 func TestMsgCreateHelp_ValidateBasic(t *testing.T) {

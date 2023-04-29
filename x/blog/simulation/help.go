@@ -52,10 +52,10 @@ func SimulateMsgUpdateHelp(
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		var (
 			simAccount = simtypes.Account{}
-			help = types.Help{}
-			msg = &types.MsgUpdateHelp{}
-			allHelp = k.GetAllHelp(ctx)
-			found = false
+			help       = types.Help{}
+			msg        = &types.MsgUpdateHelp{}
+			allHelp    = k.GetAllHelp(ctx)
+			found      = false
 		)
 		for _, obj := range allHelp {
 			simAccount, found = FindAccount(accs, obj.Creator)
@@ -97,10 +97,10 @@ func SimulateMsgDeleteHelp(
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		var (
 			simAccount = simtypes.Account{}
-			help = types.Help{}
-			msg = &types.MsgUpdateHelp{}
-			allHelp = k.GetAllHelp(ctx)
-			found = false
+			help       = types.Help{}
+			msg        = &types.MsgUpdateHelp{}
+			allHelp    = k.GetAllHelp(ctx)
+			found      = false
 		)
 		for _, obj := range allHelp {
 			simAccount, found = FindAccount(accs, obj.Creator)

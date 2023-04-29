@@ -14,25 +14,25 @@ import (
 	"blog/testutil/network"
 	"blog/testutil/nullify"
 	"blog/x/blog/client/cli"
-    "blog/x/blog/types"
+	"blog/x/blog/types"
 )
 
 func networkWithHelpObjects(t *testing.T, n int) (*network.Network, []types.Help) {
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
-    require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
+	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
 	for i := 0; i < n; i++ {
 		help := types.Help{
-    		Id: uint64(i),
-    	}
+			Id: uint64(i),
+		}
 		nullify.Fill(&help)
 		state.HelpList = append(state.HelpList, help)
 	}
 	buf, err := cfg.Codec.MarshalJSON(&state)
 	require.NoError(t, err)
-    cfg.GenesisState[types.ModuleName] = buf
+	cfg.GenesisState[types.ModuleName] = buf
 	return network.New(t, cfg), state.HelpList
 }
 
@@ -78,9 +78,9 @@ func TestShowHelp(t *testing.T) {
 				require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 				require.NotNil(t, resp.Help)
 				require.Equal(t,
-                	nullify.Fill(&tc.obj),
-                	nullify.Fill(&resp.Help),
-                )
+					nullify.Fill(&tc.obj),
+					nullify.Fill(&resp.Help),
+				)
 			}
 		})
 	}
@@ -115,9 +115,9 @@ func TestListHelp(t *testing.T) {
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 			require.LessOrEqual(t, len(resp.Help), step)
 			require.Subset(t,
-            	nullify.Fill(objs),
-            	nullify.Fill(resp.Help),
-            )
+				nullify.Fill(objs),
+				nullify.Fill(resp.Help),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -132,8 +132,8 @@ func TestListHelp(t *testing.T) {
 			require.LessOrEqual(t, len(resp.Help), step)
 			require.Subset(t,
 				nullify.Fill(objs),
-            	nullify.Fill(resp.Help),
-            )
+				nullify.Fill(resp.Help),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

@@ -16,13 +16,13 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	// Set post count
 	k.SetPostCount(ctx, genState.PostCount)
 	// Set all the help
-for _, elem := range genState.HelpList {
-	k.SetHelp(ctx, elem)
-}
+	for _, elem := range genState.HelpList {
+		k.SetHelp(ctx, elem)
+	}
 
-// Set help count
-k.SetHelpCount(ctx, genState.HelpCount)
-// this line is used by starport scaffolding # genesis/module/init
+	// Set help count
+	k.SetHelpCount(ctx, genState.HelpCount)
+	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
 
@@ -34,8 +34,8 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.PostList = k.GetAllPost(ctx)
 	genesis.PostCount = k.GetPostCount(ctx)
 	genesis.HelpList = k.GetAllHelp(ctx)
-genesis.HelpCount = k.GetHelpCount(ctx)
-// this line is used by starport scaffolding # genesis/module/export
+	genesis.HelpCount = k.GetHelpCount(ctx)
+	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis
 }

@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"blog/x/blog/types"
-	"blog/testutil/nullify"
 	keepertest "blog/testutil/keeper"
+	"blog/testutil/nullify"
+	"blog/x/blog/types"
 )
 
 func TestHelpQuerySingle(t *testing.T) {
@@ -50,7 +50,7 @@ func TestHelpQuerySingle(t *testing.T) {
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
-			    require.NoError(t, err)
+				require.NoError(t, err)
 				require.Equal(t,
 					nullify.Fill(tc.response),
 					nullify.Fill(response),
@@ -83,8 +83,8 @@ func TestHelpQueryPaginated(t *testing.T) {
 			require.LessOrEqual(t, len(resp.Help), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-            	nullify.Fill(resp.Help),
-            )
+				nullify.Fill(resp.Help),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -96,8 +96,8 @@ func TestHelpQueryPaginated(t *testing.T) {
 			require.LessOrEqual(t, len(resp.Help), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-            	nullify.Fill(resp.Help),
-            )
+				nullify.Fill(resp.Help),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

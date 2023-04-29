@@ -32,15 +32,15 @@ func TestGenesisState_Validate(t *testing.T) {
 				},
 				PostCount: 2,
 				HelpList: []types.Help{
-	{
-		Id: 0,
-	},
-	{
-		Id: 1,
-	},
-},
-HelpCount: 2,
-// this line is used by starport scaffolding # types/genesis/validField
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				HelpCount: 2,
+				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
 		},
@@ -71,32 +71,32 @@ HelpCount: 2,
 			valid: false,
 		},
 		{
-	desc:     "duplicated help",
-	genState: &types.GenesisState{
-		HelpList: []types.Help{
-			{
-				Id: 0,
+			desc: "duplicated help",
+			genState: &types.GenesisState{
+				HelpList: []types.Help{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
 			},
-			{
-				Id: 0,
-			},
+			valid: false,
 		},
-	},
-	valid:    false,
-},
-{
-	desc:     "invalid help count",
-	genState: &types.GenesisState{
-		HelpList: []types.Help{
-			{
-				Id: 1,
+		{
+			desc: "invalid help count",
+			genState: &types.GenesisState{
+				HelpList: []types.Help{
+					{
+						Id: 1,
+					},
+				},
+				HelpCount: 0,
 			},
+			valid: false,
 		},
-		HelpCount: 0,
-	},
-	valid:    false,
-},
-// this line is used by starport scaffolding # types/genesis/testcase
+		// this line is used by starport scaffolding # types/genesis/testcase
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			err := tc.genState.Validate()

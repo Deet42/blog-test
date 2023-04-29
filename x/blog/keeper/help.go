@@ -3,14 +3,14 @@ package keeper
 import (
 	"encoding/binary"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"blog/x/blog/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // GetHelpCount get the total number of help
 func (k Keeper) GetHelpCount(ctx sdk.Context) uint64 {
-	store :=  prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
 	byteKey := types.KeyPrefix(types.HelpCountKey)
 	bz := store.Get(byteKey)
 
@@ -24,8 +24,8 @@ func (k Keeper) GetHelpCount(ctx sdk.Context) uint64 {
 }
 
 // SetHelpCount set the total number of help
-func (k Keeper) SetHelpCount(ctx sdk.Context, count uint64)  {
-	store :=  prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
+func (k Keeper) SetHelpCount(ctx sdk.Context, count uint64) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
 	byteKey := types.KeyPrefix(types.HelpCountKey)
 	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, count)
@@ -34,28 +34,28 @@ func (k Keeper) SetHelpCount(ctx sdk.Context, count uint64)  {
 
 // AppendHelp appends a help in the store with a new id and update the count
 func (k Keeper) AppendHelp(
-    ctx sdk.Context,
-    help types.Help,
+	ctx sdk.Context,
+	help types.Help,
 ) uint64 {
 	// Create the help
-    count := k.GetHelpCount(ctx)
+	count := k.GetHelpCount(ctx)
 
-    // Set the ID of the appended value
-    help.Id = count
+	// Set the ID of the appended value
+	help.Id = count
 
-    store :=  prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HelpKey))
-    appendedValue := k.cdc.MustMarshal(&help)
-    store.Set(GetHelpIDBytes(help.Id), appendedValue)
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HelpKey))
+	appendedValue := k.cdc.MustMarshal(&help)
+	store.Set(GetHelpIDBytes(help.Id), appendedValue)
 
-    // Update help count
-    k.SetHelpCount(ctx, count+1)
+	// Update help count
+	k.SetHelpCount(ctx, count+1)
 
-    return count
+	return count
 }
 
 // SetHelp set a specific help in the store
 func (k Keeper) SetHelp(ctx sdk.Context, help types.Help) {
-	store :=  prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HelpKey))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HelpKey))
 	b := k.cdc.MustMarshal(&help)
 	store.Set(GetHelpIDBytes(help.Id), b)
 }
@@ -79,7 +79,7 @@ func (k Keeper) RemoveHelp(ctx sdk.Context, id uint64) {
 
 // GetAllHelp returns all help
 func (k Keeper) GetAllHelp(ctx sdk.Context) (list []types.Help) {
-    store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HelpKey))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HelpKey))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 
 	defer iterator.Close()
@@ -87,10 +87,10 @@ func (k Keeper) GetAllHelp(ctx sdk.Context) (list []types.Help) {
 	for ; iterator.Valid(); iterator.Next() {
 		var val types.Help
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
-        list = append(list, val)
+		list = append(list, val)
 	}
 
-    return
+	return
 }
 
 // GetHelpIDBytes returns the byte representation of the ID

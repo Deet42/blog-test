@@ -24,6 +24,6 @@ const (
 )
 
 const (
-	HelpKey= "Help/value/"
-	HelpCountKey= "Help/count/"
+	HelpKey      = "Help/value/"
+	HelpCountKey = "Help/count/"
 )

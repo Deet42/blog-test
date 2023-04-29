@@ -70,20 +70,18 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 			},
 		},
 		PostCount: 2,
-			HelpList: []types.Help{
-		{
-			Id: 0,
-			Creator: sample.AccAddress(),
-
+		HelpList: []types.Help{
+			{
+				Id:      0,
+				Creator: sample.AccAddress(),
+			},
+			{
+				Id:      1,
+				Creator: sample.AccAddress(),
+			},
 		},
-		{
-			Id: 1,
-			Creator: sample.AccAddress(),
-
-		},
-	},
-	HelpCount: 2,
-	// this line is used by starport scaffolding # simapp/module/genesisState
+		HelpCount: 2,
+		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&blogGenesis)
 }
